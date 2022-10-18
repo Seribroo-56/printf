@@ -1,51 +1,39 @@
-# printf
-# Description
-In C programming language, printf() function is used to print the “character, string, float, integer, octal and hexadecimal values” onto the output screen.
+Low-level programming & Algorithms
+Authors: Max Stuart and Sergii Garkusha
 
-The available convertion specifiers are:
+Based on the "Secrets of printf" scientific paper by Professor Don Colton
 
-%c: Prints a single character.
-%s: Prints a string of characters.
-%d: Prints integers.
-%i: Prints integers.
-%b: Prints the binary representation of an unsigned decimal.
-%u: Prints unsigned integers
-%p: Prints address of pointer
-%x: Prints the hexadecial representation of an unsigned decimal in lowercase letters
-%X:Prints the hexadecial representation of an unsigned decimal in uppercase letters
-%r: Prints a reversed string
-%R: Prints the Rot13 interpretation of a string
-Usage
-All the files are to be compiled on Ubuntu 14.04 LTS
-Compile your code with gcc -Wall -Werror -Wextra -pedantic *.c
-Include the "main.h" header file on the functions using the _printf()
-Create a file (main.c) with below contend
-Example
-#include "main.h"
-#include <stdio.h>
-/**
- * main - Entry point
- *
- * Return: Always 0
- */
+Requirements
+Authorized functions and macros:
 
-int main(void)
-{
-	int a;
-	int b;
-	char *str;
+write (man 2 write)
+malloc (man 3 malloc)
+free (man 3 free)
+va_start (man 3 va_start)
+va_end (man 3 va_end)
+va_copy (man 3 va_copy)
+va_arg (man 3 va_arg)
+If the task does not specify what to do with an edge case, do the same as printf
 
-	str = "school";
-	a = _printf("%r\n", "hello"); /*expected: notrebloh*/
-	printf("--->%d\n", a); /*expected: 10*/
+The main.c file is shown as example and for the test purpose
 
-	b = _printf("%r\n", str); /*expected: loohcs*/
-	printf("%d\n", b); /*expected: 7*/
-
-	b = _printf("%r\n", str); /*expected: loohcs*/
-	printf("%d\n", b); /*expected: 7*/
-	return (0);
-}
-
-# Authors:
-Abel Berhanu and Robel Amede
+Style guides
+Allowed editors: vi, vim, emacs
+All files should end with a new line
+The code should use the Betty style
+Global variables are not allowed
+No more than 5 functions per file
+Headers
+The prototypes of all functions should be included in header file called holberton.h
+All header files should be include guarded
+Compilation
+All files will be compiled on Ubuntu 14.04 LTS
+Programs and functions will be compiled with gcc 4.8.4 using the flags -Wall -Werror -Wextra and -pedantic
+code will be compiled this way: gcc -Wall -Werror -Wextra -pedantic *.c
+Tests
+The main.c file with tests contains all the tests
+The main.c file is commited under the test folder
+To make it work:
+Make a symbolic link to the test/main.c file to the root of the project: ln -s test/main.c .
+Compile project with -Wno-format extra flag: gcc -Wall -Werror -Wextra -pedantic -Wno-format *.c
+Do not push any .c file containting a main function in the root directory of the project

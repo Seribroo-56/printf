@@ -1,88 +1,42 @@
-.\" _printf man page /usr/share/man/man3/printf.3
-.\"
-.TH _PRINTF 3 "15-03-2021" "0.1" "_printf"
-
+.TH _PRINTF 1 "18 Octoner 2022" "1" "_printf() Manual"
 .SH NAME
-_printf
+_printf()
 
-.B_printf - format and print data. Part of a project at Holberton School.
-
+The _printf function recreates printf() form stdio.
 .SH SYNOPSIS
-Part of a project at holberton school.
-This project mimics the printf found in in C.
+.B #include "main.h"
 
-_printf FORMAT [ARGUMENT]...
-.ss
+.B int _printf(const char \fI*format\fR,
+.B ...)
 
 .SH DESCRIPTION
+Writes formatted output.
 
-_printf() the function produces output according to format string that \
-specifies how subsequent arguments are written and converted to stdout, the \
-standard output stream.
+.B Return Value
+.RS 3
+The function returns the number of characters printed (excluding the null byte), or -1, if error.
+.RE
 
-_printf() will loop through the format for a conversion specifier (%). If found\
-, it will access an array of structures and match the corresponding character \
-with the given function. The specified function will return a string-converted \
-version of the result and immediately passed into the buffer.
+.SH NOTES
+The program doesn't account for flags, fields, precision, or length modifiers.
 
-.SH CONVERSION SPECIFIERS
-
-.IP %s
-prints a string.
-.IP %c
-prints a character.
-.IP %d
-prints an integer. Same as %i.
-.IP %i
-See %d.
-.IP %u
-Prints unsigned int.
-.IP %o
-Converts unsigned int to octal.
-.IP %x
-Converts unsigned int to hexadecimal (lowercase)
-.IP %X
-Converts unsigned int to hexadecimal (uppercase)
-.IP %r
-Prints reverse of intput string
-.IP %R
-Converts string to rot13
-
-.SH OPTIONS
-
-Pending
-
-.SH FORMAT
-controls the output as in C printf.  Interpreted sequences are:
-
-       \n     new line
-
-       \t     tab
-
-       %%     a single %
-
-.SS Example
-.RS
-_printf("Hello %s", "world");
-Prints string "Hello world"
-
-_printf("They call me mad, but one day when history of France is written, they \
-will mark my name well ...%s ", "Sidney Applebaum")
+.SH EXAMPLE
+.RS 3
+To print a sentence with conversion specifiers:
 
 .RE
 
-.SS Return Value
-Upon success, these main function will return the number of characters printed.
+.RS 8
+#include "holberton.h"
 
-.SH "SEE ALSO"
-.SH ""
+_printf("%s has %d studio albums.", "Kraftwerk", 10);
+.RE
 
-.BR printf(1)
+.RS 3
+Output : "Kraftwerk has 10 studio albums."
+.RE
 
-.P
-
-.SH BUGS
-Memory issues are known to frequent this function. User beware.
-
-.SH "AUTHOR"
-Beteab Admassu and Yitbarek yakob
+.SH SEE ALSO
+.B printf(3)
+.SH AUTHOR
+Max Stuart, Sergii Garkusha

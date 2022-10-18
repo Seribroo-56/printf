@@ -1,43 +1,55 @@
 #include "main.h"
+#include <stdio.h>
+
 /**
- * _printf - printf function
- * @format: const char pointer
- * Return: b_len
+ * _printf - takes a string and args of each '%'
+ * and prints them
+ * @format: initial string containing % +
+ * char denoting type and number of args
+ * @...: variable list of arguments
+ *
+ * Return: number of characters printed.
  */
 int _printf(const char *format, ...)
 {
-	int (*pfunc)(va_list, flags_t *);
-	const char *p;
-	va_list arguments;
-	flags_t flags = {0, 0, 0};
+	int i, j;
+	int count = 0;
+	va_list lst;
+	interface ids[] = {
+		{'c', _print_char},
+		{'s', _print_string},
+		{'i', _print_int},
+		{'d', _print_int},
+		{'%', _print_mod},
+		{'\0', NULL}
+	};
 
-	register int count = 0;
-
-	va_start(arguments, format);
-	if (!format || (format[0] == '%' && !format[1]))
-		return (-1);
-	if (format[0] == '%' && format[1] == ' ' && !format[2])
-		return (-1);
-	for (p = format; *p; p++)
-	{
-		if (*p == '%')
+	va_start(lst, format);
+	for (i = 0; format[i]; i++)
+		if (format[i] == '%')
 		{
-			p++;
-			if (*p == '%')
+			i++;
+			for (; format[i] != '\0'; i++)
 			{
-				count += _putchar('%');
-				continue;
+				for (j = 0; ids[j].id != '\0'; j++)
+					if (format[i] == ids[j].id)
+					{
+						count += ids[j].fn(lst);
+						break;
+					}
+				if (ids[j].id)
+					break;
 			}
-			while (get_flag(*p, &flags))
-				p++;
-			pfunc = get_print(*p);
-			count += (pfunc)
-				? pfunc(arguments, &flags)
-				: _printf("%%%c", *p);
-		} else
-			count += _putchar(*p);
-	}
-	_putchar(-1);
-	va_end(arguments);
+			if (format[i] == '\0')
+				return (-1);
+		}
+		else
+		{
+			write(1, &format[i], 1);
+			count += 1;
+		}
+
+	va_end(lst);
 	return (count);
-}
+	}
+
