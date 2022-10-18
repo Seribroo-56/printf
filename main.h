@@ -1,26 +1,33 @@
-#ifndef _MAIN_h_
-#define _main_h_
+#ifndef HOLBERTON_H
+#define HOLBERTON_H
 
-#include <unistd.h>
 #include <stdarg.h>
-#include <stdlib.h>
+
+int _putchar(char c);
+int print_int(va_list arg);
+int print_unsigned(va_list arg);
+int _printf(const char *format, ...);
+int print_char(va_list arg);
+int print_str(va_list arg);
+int print_percent(void);
+void print_binary(unsigned int n, unsigned int* printed);
+int print_unsignedToBinary(va_list arg);
+int print_oct(va_list arg);
+int print_unsignedIntToHex(unsigned int num, char _case);
+int print_hex_base(va_list arg, char _case);
+int print_hex(va_list arg);
+int print_HEX(va_list arg);
+int print_STR (va_list arg);
 
 /**
- * struct intface - interface for printing
- * @id: the character, which identifies the type of
- * the argument
- * @fn: function to run if id matches
+ * struct identifierStruct - structure definition of a printTypeStruct
+ * @indentifier: type
+ * @printer: function to print
  */
-typedef struct intface
+typedef struct identifierStruct
 {
-	char id;
-	int (*fn)(va_list);
-} interface;
+char *indentifier;
+int (*printer)(va_list);
+} identifierStruct;
 
-int _printf(const char *format, ...);
-int _print_char(va_list ls);
-int _print_mod(va_list ls);
-int _print_string(va_list ls);
-int _print_int(va_list ls);
-
-#endif /* main */
+#endif
